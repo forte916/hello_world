@@ -6,8 +6,11 @@ print "Hello, world!"
 # Python 3.x
 print("Hello, world!")
 
+# Multi byte characters
+print ((u'ハロー').encode('utf-8'))
 
 '''
-comment for multiple lines
+Unicode Encode Error occurs below
 '''
+#print u'ハロー'
 
