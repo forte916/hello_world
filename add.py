@@ -4,9 +4,9 @@
 import sys
 
 def usage():
-        print 'usage: {} num1 num2'.format(sys.argv[0])
-        print '   eg) {} 11 22'.format(sys.argv[0])
-        print '   eg) echo 33 44 | {}'.format(sys.argv[0])
+        print 'Usage:  {} num1 num2'.format(sys.argv[0])
+        print '   eg)  {} 11 22'.format(sys.argv[0])
+        print '   eg)  echo 33 44 | {}'.format(sys.argv[0])
 
 
 def add(x, y):
@@ -20,12 +20,13 @@ def main():
             usage()
         else:
             x, y = map(int, line.strip().split())
-            ret = add(x, y)
-            print '{} + {} = {}'.format(x, y, ret)
     else:
-        ret = add(int(sys.argv[1]), int(sys.argv[2]))
-        print '{} + {} = {}'.format(sys.argv[1], sys.argv[2], ret)
+        #### Read from command line args
+        x = int(sys.argv[1])
+        y = int(sys.argv[2])
 
+    ret = add(x, y)
+    print '{} + {} = {}'.format(x, y, ret)
     sys.exit(0)
 
 
