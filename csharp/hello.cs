@@ -1,3 +1,5 @@
+/* Hello world in C# */
+
 class HelloWorldApp
 {
 	static void Main()
@@ -7,7 +9,6 @@ class HelloWorldApp
 	}
 }
 
-
 /**
  * How to run
 
@@ -16,4 +17,3 @@ hello.exe
 del hello.exe
 
  */
-
