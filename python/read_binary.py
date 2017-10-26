@@ -94,11 +94,11 @@ def ReadGIFHeader(infile):
         h['tableSize'] = (2 << h['sgct']) * 3        # actual table size
 
         if h['gcgf']:
-            h['gct'] = fin.read(h['tableSize'])
-            paletteSize = int(len(h['gct']) / 3)
+            buf_gct = fin.read(h['tableSize'])
+            paletteSize = int(len(buf_gct) / 3)
             h['palette'] = []
             for pos in range(0, paletteSize):
-                h['palette'].append(struct.unpack_from('<BBB', h['gct'], pos * 3))
+                h['palette'].append(struct.unpack_from('<BBB', buf_gct, pos * 3))
 
         ShowGIFHeaderInfo(h)
 
