@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import sys
@@ -6,7 +7,26 @@ import glob
 import datetime
 import hashlib
 import time
+import subprocess
 
+
+def parseStdout(data):
+    print('{} parseStdout {}'.format('-'*5, '-'*5))
+    for line in data.split(os.linesep):
+        checksum = line.split(' ')[0]
+        print(checksum)
+
+
+def subprocessSample(cmd):
+    print("start cmd: %s" % cmd)
+    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print("waiting...")
+    stdout_data, stderr_data = proc.communicate()
+    print("finish: %d %d" % (len(stdout_data), len(stderr_data)))
+    print(proc.returncode)
+    print(stdout_data)      # added extra blank line at the end
+    print(stderr_data)      # added extra blank line at the end
+    return proc.returncode, stdout_data, stderr_data
 
 def dictSample():
     print('{} dictSample {}'.format('-'*5, '-'*5))
@@ -111,4 +131,9 @@ if __name__ == '__main__':
     calcHash()
     stopWatch()
     dictSample()
+    ret, stdout_data, stderr_data = subprocessSample("md5sum *")
+    parseStdout(stdout_data)
+    ret, stdout_data, stderr_data = subprocessSample("echo -n 'admin@example.com1234' | md5sum")
+    parseStdout(stdout_data)
+
 
