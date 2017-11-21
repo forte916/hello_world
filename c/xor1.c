@@ -18,6 +18,6 @@ int main(){
     char key = 0x80;
     Enc(plain, cipher, key);
     Dec(cipher, plain, key);
-    printf("%s", plain);  // => "abcd"
+    printf("%s\n", plain);  // => "abcd"
 }
 

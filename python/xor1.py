@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: UTF-8
 '''
-XOR encode and decode samples.
+XOR calculation samples.
 '''
 
 
