@@ -6,7 +6,9 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>  //isgraph()
+#include <ctype.h>    //isgraph()
+#include <stdlib.h>   //srand()
+#include <time.h>     //time()
 
 
 /**
@@ -47,24 +49,40 @@ void xor_enc_short_key(char* plain, char* cipher, char* key)
  * @param[in]  plain  A source text.
  * @param[out] cipher A destination text to be encoded.
  * @param[in]  key    A key which is equal or longer than a source text.
+ * @return     0 if succeeds, otherwise -1.
  */
-void xor_enc_stream_cipher(char* plain, char* cipher, char* key)
+int xor_enc_stream_cipher(char* plain, char* cipher, char* key)
 {
 	int p_len = strlen(plain);
-	int key_len = strlen(key);
+	int key_len = strlen(key); //UGLY:: If key contains NUL, key_len goes wrong.
 	if (key_len < p_len) {
-		printf("Invalid argument: key is shorter than source text.");
-		return ;
+		printf("Invalid argument: key is shorter than source text.\n");
+		return -1;
 	}
 	for (int i = 0; i < p_len; i++) {
 		cipher[i] = plain[i] ^ key[i];
 	}
+	return 0;
 }
 
 
-void print_hex_char(char *str)
+/**
+ * @brief Generate a random string with a given length.
+ *
+ * @param[out] buf An output buffer.
+ * @param[in]  len A length of buf.
+ */
+void gen_key(char* buf, int len)
 {
-	int len = strlen(str);
+	srand(time(NULL));
+	for (int i = 0; i < len; i++) {
+		//printf("%d\n", rand() % 256);
+		buf[i] = rand() % 256;
+	}
+}
+
+void print_char(char *str, int len)
+{
 	for(int i = 0; i < len; i++) {
 		printf("%c", isgraph(str[i]) ? str[i] : '.');
 	}
@@ -79,45 +97,63 @@ int main(void)
 	char key2[]  = "Abcd";
 	char key3[]  = "Abcdabcdabciabcdabcd";
 	char plain[] = "This is plain text";
-	//                  v  v   v
-	//key3 ^ plain:"    A  D   \0     "
+	//                  v  v   v v
+	//key3 ^ plain:"    A  D   \0B    "
 	// If 'printable letter' xor 'blank space', the result is the UPPER/LOWER case letter.
 	// If same letter, the result is the NUL(\0).
 
 	printf("Original string:  ");
 	printf("%s\n", plain);
+	int len = sizeof(plain);
 
 	printf("---- Test case 1 ----\n");
 	// encrypt
 	xor_enc_one_byte_key(plain, cipher, key1);
 	printf("Encrypted string: ");
-	print_hex_char(cipher);
+	print_char(cipher, len);
 	// decrypt
 	xor_enc_one_byte_key(cipher, plain, key1);
 	printf("Decrypted string: ");
-	print_hex_char(plain);
+	print_char(plain, len);
 
 
 	printf("---- Test case 2 ----\n");
 	// encrypt
 	xor_enc_short_key(plain, cipher, key2);
 	printf("Encrypted string: ");
-	print_hex_char(cipher);
+	print_char(cipher, len);
 	// decrypt
 	xor_enc_short_key(cipher, plain, key2);
 	printf("Decrypted string: ");
-	print_hex_char(plain);
+	print_char(plain, len);
 
 
 	printf("---- Test case 3 ----\n");
 	// encrypt
 	xor_enc_stream_cipher(plain, cipher, key3);
 	printf("Encrypted string: ");
-	print_hex_char(cipher);
+	print_char(cipher, len);
 	// decrypt
 	xor_enc_stream_cipher(cipher, plain, key3);
 	printf("Decrypted string: ");
-	print_hex_char(plain);
+	print_char(plain, len);
+
+
+	printf("---- Test case 4 ----\n");
+	char key4[32] = {0};
+	gen_key(key4, sizeof(key4));
+	printf("Generated key   : ");
+	print_char(key4, sizeof(key4));
+	// encrypt
+	xor_enc_stream_cipher(plain, cipher, key4);
+	printf("Encrypted string: ");
+	print_char(cipher, len);
+	// decrypt
+	xor_enc_stream_cipher(cipher, plain, key4);
+	printf("Decrypted string: ");
+	print_char(plain, len);
+
+
 
 	return 0;
 }
