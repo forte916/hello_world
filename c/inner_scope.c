@@ -25,8 +25,6 @@ int main(int argc, char *argv[])
 }
 
 /*
-手元の実行結果では、スコープが異なる変数はアドレスが異なることが確認できています
-
 Console output:
 
 $ gcc -o inner_scope inner_scope.c
@@ -35,5 +33,7 @@ Hello, world!
 outer: 0xffffcbfc: 1
 inner: 0xffffcbf8: 2
 outer: 0xffffcbfc: 1
+
+手元の実行結果では、スコープが異なる変数はアドレスが異なることが確認できています
 
 */

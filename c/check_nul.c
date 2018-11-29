@@ -81,8 +81,6 @@ int main(int argc, char *argv[])
 
 
 /*
-手元の実行結果では、NUL 終端されているかどうかを正しく判定できています
-
 Console output:
 
 $ gcc -o test test.c
@@ -122,5 +120,7 @@ has_nul:1
 4:o
 5:
 has_nul:1
+
+手元の実行結果では、NUL 終端されているかどうかを正しく判定できています
 
 */

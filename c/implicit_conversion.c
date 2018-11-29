@@ -36,8 +36,6 @@ int main(int argc, char *argv[])
 }
 
 /*
-手元の実行結果では、型の違いで比較の結果が変わることが分かります
-
 Console output:
 
 $ gcc -o implicit_conversion implicit_conversion.c
@@ -47,5 +45,7 @@ int    a: -1, 4294953852, 0x8013f700
 size_t b: -1, 4294953208, 0x8013f700
 int    a < 10: TRUE
 size_t b < 10: FALSE
+
+手元の実行結果では、型の違いで比較の結果が変わることが分かります
 
 */

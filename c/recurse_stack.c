@@ -26,11 +26,9 @@ int main(int argc, char *argv[])
 
 
 /*
-手元の実行結果では、大量の stack を確保するとアプリがクラッシュすることが確認できました
-
 Console output:
 
-// On Mac
+// On Mac OSX
 $ gcc -o recurse_stack recurse_stack.c
 $ ./recurse_stack
 Hello, world!
@@ -165,7 +163,7 @@ Segmentation fault: 11
 
 
 
-// On cygwin
+// On cygwin in Windows
 $ ./recurse_stack
 Hello, world!
 depth   0: stack 0xfffecbc0
@@ -200,5 +198,7 @@ depth  28: stack 0xffe2c680
 depth  29: stack 0xffe1c650
 depth  30: stack 0xffe0c620
 Segmentation fault (コアダンプ)
+
+手元の実行結果では、大量の stack を確保するとアプリがクラッシュすることが確認できました
 
 */

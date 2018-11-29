@@ -67,10 +67,6 @@ int main(int argc, char *argv[])
 
 
 /*
-手元の実行結果では、case2 や case3 では
-恐らく pram[50] = NUL, value[50] = NUL が自動的に代入され、OOB write となっていた可能性がある
-このテストプログラムでは crash は発生しない
-
 Console output:
 
 $ ./test_sscanf_OOB_write
@@ -91,5 +87,9 @@ len:49, param:[1234567890123456789012345678901234567890123456789]
 len:49, value:[0]
 len:49, param:[1234567890123456789012345678901234567890123456789]
 len:49, value:[01]
+
+手元の実行結果では、case2 や case3 では
+恐らく pram[50] = NUL, value[50] = NUL が自動的に代入され、OOB write となっていた可能性がある
+このテストプログラムでは crash は発生しない
 
 */

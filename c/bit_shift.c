@@ -29,8 +29,6 @@ int main(int argc, char *argv[])
 
 
 /*
-手元の実行結果では、1 と 2 は演算結果は変わらない。3 は 4 に変わる
-
 Console output:
 
 $ gcc -o bit_shift bit_shift.c
@@ -41,5 +39,7 @@ Let's calculate (1U << input) >> 1
 3 to 4
 4 to 8
 5 to 16
+
+手元の実行結果では、1 と 2 は演算結果は変わらない。3 は 4 に変わる
 
 */
